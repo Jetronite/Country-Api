@@ -78,11 +78,12 @@ export async function refreshCountries(req, res) {
 
     // 1️⃣ Fetch countries
     const countriesRes = await axios.get(
-      "https://restcountries.com/v2/all?fields=name,capital,region,population,flag,currencies"
+      "https://restcountries.com/v2/all?fields=name,capital,region,population,flag,currencies",
+      { timeout: 10000 }
     );
 
     // 2️⃣ Fetch exchange rates
-    const ratesRes = await axios.get("https://open.er-api.com/v6/latest/USD");
+    const ratesRes = await axios.get("https://open.er-api.com/v6/latest/USD", { timeout: 10000 });
     if (ratesRes.data.result !== "success") {
       return res.status(503).json({
         error: "External data source unavailable",
