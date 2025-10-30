@@ -12,6 +12,7 @@ export default {
       user: process.env.DB_USER || "root",
       password: process.env.DB_PASS || "",
       database: process.env.DB_NAME || "countries_db",
+      port: process.env.DB_PORT || 3306,
     },
     migrations: {
       directory: "./migrations",
@@ -27,9 +28,15 @@ export default {
       user: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
+      port: process.env.DB_PORT || 3306,
+
+      // ✅ This is the key fix for Railway deployments:
+      ssl: { rejectUnauthorized: false },
     },
-    migrations: { directory: "./migrations", extension: "js" },
+    migrations: {
+      directory: "./migrations",
+      extension: "js",
+    },
+    pool: { min: 2, max: 10 },
   },
 };
-
-
