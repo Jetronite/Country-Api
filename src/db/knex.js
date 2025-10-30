@@ -2,6 +2,7 @@ import knex from "knex";
 import config from "../../knexfile.js";
 
 const environment = process.env.NODE_ENV || "development";
-const db = knex(config[environment]);
+const dbConfig = config[environment] || config.development;
+const db = knex(dbConfig);
 
 export default db;
