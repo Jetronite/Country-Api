@@ -8,12 +8,12 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-app.get("*", (req, res) => {
-  console.log("Incoming request to:", req.originalUrl);
-  res.json({ path: req.originalUrl });
+app.get("/", (req, res) => {
+  res.json({
+    message: "🌍 Country API is live!",
+    endpoints: ["/status", "/countries", "/countries/refresh"]
+  });
 });
-
-
 
 // Routes
 app.use("/countries", countriesRouter);
