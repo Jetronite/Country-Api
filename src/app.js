@@ -8,9 +8,11 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.json({ message: "🌍 Country Currency API is live", endpoints: ["/status", "/countries"] });
+app.get("*", (req, res) => {
+  console.log("Incoming request to:", req.originalUrl);
+  res.json({ path: req.originalUrl });
 });
+
 
 
 // Routes
